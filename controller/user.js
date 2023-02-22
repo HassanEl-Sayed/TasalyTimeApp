@@ -80,7 +80,6 @@ exports.postRating = async (req, res) => {
         seriesId:req.body.seriesId,
         userId: req.user._id  //store id of user auto that user when login
     });
-
     try {
         await rate.save()
         res.status(201).send(rate)
@@ -88,6 +87,8 @@ exports.postRating = async (req, res) => {
         res.status(400).send(e.message)
     }
 };
+
+
 
 
 

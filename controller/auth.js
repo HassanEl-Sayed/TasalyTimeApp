@@ -4,7 +4,8 @@ exports.postSignup = async (req,res)=>{
     const newUser = new User(req.body)
     try {
         await newUser.save()
-        res.status(201).json(newUser)
+        const {favList, tokens,...info} = newUser._doc;
+        res.status(201).json(info)
     } catch (e) {
         res.status(400).json(e.message)
     }
@@ -14,7 +15,7 @@ exports.postLogin = async (req,res)=>{
     try {
         const user = await User.isLogin(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
-        const {password,__v ,tokens, ...info} = user._doc;
+        const {password,__v ,tokens,favList, ...info} = user._doc;
         res.status(200).json({
             message:"Login Successfully",
             ...info,

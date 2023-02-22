@@ -3,6 +3,7 @@ const fs = require('fs');
 // ==> Add Movie
 exports.postMovie = async (req,res)=>{
     const movie = new Movie(req.body)
+    
     try {
         await movie.save()
         res.status(201).json({

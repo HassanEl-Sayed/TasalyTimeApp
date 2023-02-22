@@ -17,7 +17,7 @@ router.delete('/remove', userAuth, userController.deleteUser);
 router.get('/all',  userController.getUsers);
 //==> get one user
 router.get('/:id',  userController.getUser);
-//==> get one user
+//==> Add rateing
 router.post('/rate',  userAuth, userController.postRating);
 
 

@@ -32,9 +32,21 @@ const userSchema = new mongoose.Schema({
     },
     tokens:[{
         token:{type :String}
-    }]   
+    }],
+    favList:{
+        movies:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Movies'
+        }],
+        series:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Series'
+        }]
+    }
 },{timestamps: true}
 )
+
+
 
 // Hash the plain text password before saving
 // userSchema.pre('save', async function (next) {
