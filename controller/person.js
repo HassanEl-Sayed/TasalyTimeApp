@@ -1,4 +1,5 @@
 const Person = require('../models/Person');
+const fs = require('fs');
 
 //==> Add Person
 exports.postPerson = async (req,res)=>{
@@ -8,6 +9,19 @@ exports.postPerson = async (req,res)=>{
         res.status(201).json(newPerson)
     } catch (e) {
         res.status(400).json(e.message)
+    }
+};
+
+//==>upload an image 
+exports.uploadImage =  async (req , res)=>{
+    const img = fs.readFileSync('uploads/' + req.file.filename);
+    try {
+        const person =  await Person.findById({_id:req.params.id});
+        person.img = img;
+        await person.save()
+        res.status(200).send('successfully uploaded')
+    } catch (error) {
+        res.status(500).json(err.message)
     }
 };
 

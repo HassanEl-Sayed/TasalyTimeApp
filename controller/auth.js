@@ -1,14 +1,7 @@
 const User = require('../models/User');
-const fs = require('fs');
 
 exports.postSignup = async (req,res)=>{
-    const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        gender: req.body.gender,
-        // img: fs.readFileSync('uploads/' + req.file.filename)
-    })
+    const newUser = new User(req.body)
     try {
         await newUser.save()
         res.status(201).json(newUser)

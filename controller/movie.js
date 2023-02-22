@@ -1,5 +1,5 @@
 const Movie = require('../models/Movie');
-
+const fs = require('fs');
 // ==> Add Movie
 exports.postMovie = async (req,res)=>{
     const movie = new Movie(req.body)
@@ -12,7 +12,21 @@ exports.postMovie = async (req,res)=>{
     } catch (e) {
         res.status(400).json(e.message)
     }
-}
+};
+
+//==>upload an image 
+exports.uploadImage =  async (req , res)=>{
+    const img = fs.readFileSync('uploads/' + req.file.filename);
+    try {
+        const movie =  await Movie.findById({_id:req.params.id});
+        movie.img = img;
+        await movie.save()
+        res.status(200).send('successfully uploaded')
+    } catch (error) {
+        res.status(500).json(err.message)
+    }
+};
+
 //==> Update Movie
 exports.updateMovie = async (req,res)=>{
     const updates = Object.keys(req.body)

@@ -29,7 +29,9 @@ const seriesSchema = new mongoose.Schema({
             duration:{type:String}
         }]
     }],
-    // img:{ },
+    img:[{ 
+        type :Buffer
+    }],
     // trailer:{ },
     avgRating:{
         type: Number

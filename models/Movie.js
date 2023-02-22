@@ -20,7 +20,9 @@ const moviesSchema = new mongoose.Schema({
         type:String,
         //required:true
     },
-    // img:{ },
+    img:[{ 
+        type: Buffer
+    }],
     // trailer:{ },
     avgRating:{
         type: Number

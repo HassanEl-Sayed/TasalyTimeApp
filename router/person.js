@@ -1,10 +1,12 @@
 const express = require('express');
-
 const personController = require('../controller/person');
+const upload = require('../middleware/upload');
 
 const router = express.Router();
 //==> Add person
 router.post('/add', personController.postPerson);
+//==> upload img
+router.post('/upload/:id', upload.single('img')  , personController.uploadImage);
 //==> Update Person
 router.patch('/update/:id', personController.updatePerson);
 //==> delete person

@@ -18,7 +18,9 @@ const personSchema = new mongoose.Schema({
     avgRating:{
         type: Number 
     },
-    // img:{},
+    img:[{
+        type:Buffer
+    }],
     roleId:[{
         type: mongoose.Schema.Types.ObjectId,
         required: true,

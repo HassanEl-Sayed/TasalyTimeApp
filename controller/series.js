@@ -1,4 +1,5 @@
 const Series = require('../models/Series');
+const fs = require('fs');
 
 //==> Add Series
 exports.postSeries = async (req,res)=>{
@@ -13,6 +14,19 @@ exports.postSeries = async (req,res)=>{
         res.status(400).json(e.message)
     }
 }
+
+//==>upload an image 
+exports.uploadImage =  async (req , res)=>{
+    const img = fs.readFileSync('uploads/' + req.file.filename);
+    try {
+        const series =  await Series.findById({_id:req.params.id});
+        series.img = img;
+        await series.save()
+        res.status(200).send('successfully uploaded')
+    } catch (error) {
+        res.status(500).json(err.message)
+    }
+};
 
 //==> Update Series
 exports.updateSeries = async (req,res)=>{

@@ -28,7 +28,7 @@ app.listen(port, () => {
     console.log(`Server on port ${port}`);
 });
 
-// error 
+// error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;

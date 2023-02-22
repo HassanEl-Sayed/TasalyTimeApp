@@ -4,17 +4,20 @@ const fs = require('fs');
 
 
 //==>upload an image 
-exports.uploadImage =  (req , res)=>{
-    const img = fs.readFileSync('uploads/' + req.file.filename)
-    req.user.img = img
-    req.user.save()
-    .then(()=>res.status(200).send('successfully uploaded'))
-    .catch((err)=>console.log(err.message))
-}
+exports.uploadImage =  async (req , res)=>{
+    const img = fs.readFileSync('uploads/' + req.file.filename);
+    try {
+        req.user.img = img
+        await req.user.save()
+        res.status(200).send('successfully uploaded')
+    } catch (error) {
+        res.status(500).json(err.message)
+    }
+};
 
 //==> Profile user
 exports.getProfile = async (req,res)=>{
-    const {__v ,tokens, ...info} = req.user._doc;
+    const {__v ,tokens,img, ...info} = req.user._doc;
     res.json(info)
 };
 

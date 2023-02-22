@@ -5,8 +5,6 @@ const userController = require('../controller/user');
 
 const router = express.Router();
 
-
-
 //==> get profile of user
 router.get('/me', userAuth, userController.getProfile);
 //==> upload img

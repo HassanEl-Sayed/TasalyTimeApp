@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: Date
     },
     img:{
-        type: Buffer,
+        type: Buffer
     },
     tokens:[{
         token:{type :String}
