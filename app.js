@@ -5,6 +5,7 @@ require("./util/dbConnection");
 
 const app = express();
 
+
 const authRoutes = require("./router/auth");
 const userRoutes = require("./router/user");
 const adminRoutes = require("./router/admin");
@@ -27,7 +28,7 @@ app.listen(port, () => {
     console.log(`Server on port ${port}`);
 });
 
-// error handler
+// error 
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
